@@ -41,16 +41,16 @@ jobs:
           source ./.venv/bin/activate  # Activate the virtual environment
           pip install pytest
           pip install pytest-cov
-          pytest --cov=./ --cov-report=xml bluecast/tests/test_analyse.py
+          pytest --cov=./ --cov-report=xml bluecast/tests/test_save_to_production.py
       - name: List installed packages
         run: |
           python -m poetry lock
           python -m poetry show --tree
+          ls
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./coverage/reports/
           env_vars: OS,PYTHON
           fail_ci_if_error: true
           files: |
